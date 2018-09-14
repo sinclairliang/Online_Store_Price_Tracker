@@ -1,3 +1,5 @@
 Flask
 pymongo
 beautifulsoup4
+uuid
+passlib
