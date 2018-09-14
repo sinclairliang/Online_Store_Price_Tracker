@@ -2,6 +2,8 @@ import uuid
 
 from src.commom.database import Database
 from src.commom.utils import Utils
+from src.models.users.error import UserNotExistException as UserErrors
+
 
 class User(object):
     def __init__(self, email, password, _id=None):
@@ -22,11 +24,9 @@ class User(object):
         :param password: a sha512 hashed password
         :return: Boolean value
         """
-        user_date = Database.find_one("users", {"email": email})
-        if user_date is None:
-            # user does not exist
-            pass
+        user_data = Database.find_one("users", {"email": email}) # password in sha512->pbkdf2_sha512
+        if user_data is None:
+            raise UserErrors("Your user does not exist")
         if not Utils.check_hashed_password(password, user_data['password']):
-            # the password is not valid
-            pass
+            raise UserErrors("Your password is not correct")
         return True
