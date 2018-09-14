@@ -4,8 +4,7 @@ from src.commom.database import Database
 
 app = Flask(__name__)
 app.config.from_object('config')
-
-
+app.secret_key = "1479"
 
 
 @app.before_first_request
