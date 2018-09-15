@@ -1,4 +1,4 @@
-#Online Store Price Tracker
+# Online Store Price Tracker
 
 ### Progress
 **14th September, 2018: Started Project**
