@@ -29,3 +29,21 @@ class User(object):
         if not Utils.check_hashed_password(password, user_data['password']):
             raise UserErrors.IncorrectPasswordException("Your password is not correct")
         return True
+
+
+    @staticmethod
+    def register_user(email, password):
+        """
+        This method register an user using an email
+        :param email: user's email
+        :param password: sha512 hashed password
+        :return: Boolean, to see if the process is successful (Exceptions might be raised)
+        """
+
+        user_data = Database.find_one("users", {"email": email})
+
+        if user_data is not None:
+            # user alrady exists
+            pass
+        if not utils.email_is_valid(email):
+            pass
