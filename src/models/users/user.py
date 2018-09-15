@@ -23,6 +23,9 @@ class User(object):
         :param password: a sha512 hashed password
         :return: Boolean value
         """
+        # print("Kere")
+        # Database.initialize()
+        # print("here")
         user_data = Database.find_one("users", {"email": email}) # password in sha512->pbkdf2_sha512
         if user_data is None:
             raise UserErrors.UserNotExistException("Your user does not exist")

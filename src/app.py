@@ -15,3 +15,4 @@ def init_db():
 from src.models.users.views import user_blueprint
 app.register_blueprint(user_blueprint, url_prefix="/users")
 
+# print(Database.find_one("users", {"email": "test@test.com"}))

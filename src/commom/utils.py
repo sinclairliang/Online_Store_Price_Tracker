@@ -12,7 +12,6 @@ class Utils(object):
         """
         return pbkdf2_sha512.encrypt(password)
 
-
     @staticmethod
     def check_hashed_password(password, hashed_password):
         """
@@ -23,4 +22,3 @@ class Utils(object):
         :return: Boolean value
         """
         return pbkdf2_sha512.verify(password, hashed_password)
-

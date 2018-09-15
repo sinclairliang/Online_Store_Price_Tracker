@@ -7,37 +7,52 @@ from src.models.users.user import User
 user_blueprint = Blueprint('users', __name__)
 
 
+# @user_blueprint.route('/login', methods=['GET', 'POST'])
+# def login_user():
+#     if request.method == 'POST':
+#         email = request.form['email']
+#         password = request.form['hashed']
+#         try:
+#             if User.login_valid(email, password):
+#                 session['email'] = email
+#                 return redirect(url_for(".user_alerts"))
+#         except UserErrors as e:
+#                 return e.message
+#     return render_template("users/login.html") # wish to return a pop-up window
+
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['hashed']
-        try:
-            if User.login_valid(email, password):
-                session['email'] = email
-                return redirect(url_for(".user_alerts"))
-        except UserErrors as e:
-                return e.message
+        if User.login_valid(email, password):
+            session['email'] = email
+            return redirect(url_for(".user_alerts"))
+
     return render_template("users/login.html") # wish to return a pop-up window
 
 
-@user_blueprint.route('/register', methods=['GET', 'POST'])
+# @user_blueprint.route('/register', methods=['GET', 'POST'])
+# def register_user():
+#     if request.method == 'POST':
+#         email = request.form['email']
+#         password = request.form['hashed']
+#         try:
+#             if User.login_valid(email, password):
+#                 session['email'] = email
+#                 return redirect(url_for(".user_alerts"))
+#         except UserErrors as e:
+#                 return e.message
+#     return render_template("users/login.html") # wish to return a pop-up window
+
+@user_blueprint.route('/register')
 def register_user():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['hashed']
-        try:
-            if User.login_valid(email, password):
-                session['email'] = email
-                return redirect(url_for(".user_alerts"))
-        except UserErrors as e:
-                return e.message
-    return render_template("users/login.html") # wish to return a pop-up window
+    pass
 
 
 @user_blueprint.route('/alerts')
 def user_alerts():
-    return "This is the alert page"
+    return "Log in successfully"
 
 
 @user_blueprint.route('/logout')
