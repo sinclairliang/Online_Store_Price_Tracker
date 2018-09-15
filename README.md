@@ -13,7 +13,7 @@ Flowchart
 	
 	
 	
-##Dependencies
+## Dependencies
 	Flask
 	pymongo
 	beautifulsoup4
