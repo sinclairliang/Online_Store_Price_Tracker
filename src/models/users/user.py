@@ -30,7 +30,6 @@ class User(object):
             raise UserErrors.IncorrectPasswordException("Your password is not correct")
         return True
 
-
     @staticmethod
     def register_user(email, password):
         """
@@ -44,6 +43,20 @@ class User(object):
 
         if user_data is not None:
             # user alrady exists
+            # gonna use RegeX
             pass
-        if not utils.email_is_valid(email):
+        if not Utils.email_is_valid(email):
+            # email address not properly constructed
             pass
+        User(email, Utils.hash_password(password)).save_to_db()
+        return True
+
+    def save_to_db(self):
+        Database.insert('users', self.json)
+
+    def json(self):
+        return {
+            "email": self.email,
+            "password": self.password,
+            "_id": self._id
+        }
