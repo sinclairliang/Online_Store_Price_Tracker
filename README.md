@@ -1,5 +1,4 @@
 #Online Store Price Tracker
-**A cross-platform python based utility to automatically grade homework/assignments**
 
 ### Progress
 **14th September, 2018: Started Project**
