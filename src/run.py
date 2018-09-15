@@ -1,3 +1,3 @@
 from src.app import app
 
-app.run(debug=app.config['DEBUG'], port = 4995)
+app.run(debug=app.config['DEBUG'], port=4995)

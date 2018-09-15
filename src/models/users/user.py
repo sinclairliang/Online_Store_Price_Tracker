@@ -14,7 +14,6 @@ class User(object):
     def __repr__(self):
         return"---User {}---".format(self.email)
 
-
     @staticmethod
     def login_valid(email, password):
         """
