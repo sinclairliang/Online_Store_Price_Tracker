@@ -5,3 +5,9 @@ class Store(object):
 
     def __repr__(self):
         return "---Store {}---".format(self.name)
+
+    def get_tag_name(self):
+        pass
+
+    def get_query_name(self):
+        pass
