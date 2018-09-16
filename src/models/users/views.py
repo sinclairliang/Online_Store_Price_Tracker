@@ -37,7 +37,16 @@ def register_user():
 
 @user_blueprint.route('/register')
 def register_user():
-    pass
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['hashed']
+        try:
+            if User.register_user(email, password):
+                session['email'] = email
+                return redirect(url_for(".user_alerts"))
+        except UserErrors.UserError as e:
+                return e.message
+    return render_template("users/register.html") # wish to return a pop-up window
 
 
 @user_blueprint.route('/alerts')

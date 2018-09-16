@@ -9,3 +9,11 @@ class UserNotExistException(UserError):
 
 class IncorrectPasswordException(UserError):
     pass
+
+
+class UserAlreadyRegisterError(UserError):
+    pass
+
+
+class UserEmailInvalidError(UserError):
+    pass

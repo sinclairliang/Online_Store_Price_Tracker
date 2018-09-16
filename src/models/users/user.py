@@ -42,11 +42,10 @@ class User(object):
         user_data = Database.find_one("users", {"email": email})
 
         if user_data is not None:
-            # user alrady exists
-            # gonna use RegeX
+            raise UserErrors.UserAlreadyRegisterError("The user is already registered with us.")
             pass
         if not Utils.email_is_valid(email):
-            # email address not properly constructed
+            raise UserErrors.UserEmailInvalidError("The email address cannot be parsed. Questions?")
             pass
         User(email, Utils.hash_password(password)).save_to_db()
         return True
