@@ -5,14 +5,13 @@ import uuid
 
 from src.commom.database import Database
 import src.models.items.constants as ItemConstants
-from src.models.stores.store import Store
 
 
 class Item(object):
-    def __init__(self, name, url, _id=None):
+    def __init__(self, name, url, store, _id=None):
         self.name = name
         self.url = url
-        store = Store.get_by_url(url)
+        self.store = store
         tag_name = store.get_tag_name()
         query = store.get_query_name()
         self.price = self.load_item_price(tag_name, query)
