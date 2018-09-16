@@ -1,19 +1,21 @@
 import requests
 import bs4
 import re
+import uuid
 
 from src.commom.database import Database
 import src.models.items.constants as ItemConstants
 
 
 class Item(object):
-    def __init__(self, name, url, store):
+    def __init__(self, name, url, store, _id=None):
         self.name = name
         self.url = url
         self.store = store
         tag_name = store.get_tag_name()
         query = store.get_query_name()
         self.price = self.load_item_price(tag_name, query)
+        self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
         if self.price is not None:
@@ -30,17 +32,17 @@ class Item(object):
         string_price = element.text.strip()
         pattern = re.compile("(\d+.\d+)") # 74.37
         match = pattern.search(string_price)
-        print(match)
         return match.group()
 
-    def save_to_db(self):
-        Database.insert(ItemConstants.COLLECTION, self.json)
+    def save_to_mongo(self):
+        Database.insert(ItemConstants.COLLECTION, self.json())
 
     def json(self):
         return {
             "name": self.name,
             "url": self.url,
-            "price": self.price
+            "price": self.price,
+            "id": self._id
         }
 
     @classmethod

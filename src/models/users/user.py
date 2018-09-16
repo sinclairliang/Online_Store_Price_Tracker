@@ -2,7 +2,7 @@ import uuid
 
 from src.commom.database import Database
 from src.commom.utils import Utils
-import src.models.users.error as UserErrors
+import src.models.users.errors as UserErrors
 
 
 class User(object):
@@ -45,11 +45,11 @@ class User(object):
             raise UserErrors.UserAlreadyRegisterError("The user is already registered with us.")
         if not Utils.email_is_valid(email):
             raise UserErrors.UserEmailInvalidError("The email address cannot be parsed. Questions?")
-        User(email, Utils.hash_password(password)).save_to_db()
+        User(email, Utils.hash_password(password)).save_to_mongo()
         return True
 
-    def save_to_db(self):
-        Database.insert('users', self.json)
+    def save_to_mongo(self):
+        Database.insert('users', self.json())
 
     def json(self):
         return {
