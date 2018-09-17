@@ -4,6 +4,8 @@ from email.mime.text import MIMEText
 import src.models.alerts.constants as AlertConstants
 import datetime
 
+from src.commom.database import Database
+
 
 class Alert(object):
     def __init__(self, user, price_limit, item, last_check=None, _id=None):
