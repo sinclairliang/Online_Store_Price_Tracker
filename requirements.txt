@@ -5,3 +5,5 @@ uuid
 passlib
 re
 requests
+smtplib
+email
