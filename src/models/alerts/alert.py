@@ -2,6 +2,7 @@ import uuid
 import smtplib
 from email.mime.text import MIMEText
 import src.models.alerts.constants as AlertConstants
+import src.models.alerts.login as LoginInfo
 
 import datetime
 
@@ -24,12 +25,12 @@ class Alert(object):
     def send(self):
         msg = MIMEText("We found you a deal for you. Click on link: {}".format(self.item.url))
         msg['Subject'] = 'Price Reached for item{}!'.format(self.item.name)
-        msg['From'] = AlertConstants.LOGIN
+        msg['From'] = LoginInfo.LOGIN
         msg['To'] = self.user.email
 
         s = smtplib.SMTP('smtp.mailgun.org', 587)
 
-        s.login(AlertConstants.LOGIN, AlertConstants.PASSWORD)
+        s.login(LoginInfo.LOGIN, LoginInfo.PASSWORD)
         if len(s.sendmail(msg['From'], msg['To'], msg.as_string())) == 0:
             return True
         else:
