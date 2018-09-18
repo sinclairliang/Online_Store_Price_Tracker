@@ -37,13 +37,11 @@ class Alert(object):
     @classmethod
     def find_update(cls, time_since_update=AlertConstants.ALERT_TIMEOUT):
         last_updated_limit = datetime.datetime.utcnow() - datetime.timedelta(minutes=time_since_update)
-        print(last_updated_limit)
-        return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
-                                                            {"last_checked":
-                                                            {"$gte": last_updated_limit}})]
+        # print(last_updated_limit)
+        return [cls(**element) for element in Database.find(AlertConstants.COLLECTION, {"last_check": {"$lte": last_updated_limit}})]
 
     def save_to_mongo(self):
-        Database.insert(AlertConstants.COLLECTION, self.json())
+        Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
 
     def json(self):
         return{
