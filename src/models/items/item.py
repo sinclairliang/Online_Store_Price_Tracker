@@ -5,16 +5,17 @@ import uuid
 
 from src.commom.database import Database
 import src.models.items.constants as ItemConstants
+from src.models.stores.store import Store
 
 
 class Item(object):
-    def __init__(self, name, url, store, _id=None):
+    def __init__(self, name, url, _id=None):
         self.name = name
         self.url = url
-        self.store = store
-        tag_name = store.get_tag_name()
-        query = store.get_query_name()
-        self.price = self.load_item_price(tag_name, query)
+        store = Store.get_by_url(url)
+        self.tag_name = store.get_tag_name()
+        self.query = store.get_query_name()
+        self.price = None
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
@@ -24,15 +25,16 @@ class Item(object):
                                                                              self.url)
         return "---Item {} with the URL {}---".format(self.name, self.url)
 
-    def load_item_price(self, tag_name, query):
+    def load_item_price(self):
         request = requests.get(self.url)
         content = request.content
         soup = bs4.BeautifulSoup(content, "html.parser")
-        element = soup.find(tag_name, query)
+        element = soup.find(self.tag_name, self.query)
         string_price = element.text.strip()
-        pattern = re.compile("(\d+.\d+)") # 74.37
+        pattern = re.compile("(\d+.\d+)")
         match = pattern.search(string_price)
-        return match.group()
+        self.price = match.group()
+        return self.price
 
     def save_to_mongo(self):
         Database.insert(ItemConstants.COLLECTION, self.json())
@@ -49,3 +51,7 @@ class Item(object):
     def retrieve_item(cls, url):
         item_data = Database.find_one(ItemConstants.COLLECTION, url)
         return cls(**item_data)
+
+    @classmethod
+    def get_by_id(cls, item_id):
+        return cls(**Database.find_one(ItemConstants.COLLECTION, {"_id": item_id}))
