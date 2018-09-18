@@ -35,7 +35,7 @@ class Alert(object):
             return False
 
     @classmethod
-    def update(cls, time_since_update=10):
+    def find_update(cls, time_since_update=AlertConstants.ALERT_TIMEOUT):
         last_updated_limit = datetime.datetime.utcnow() - datetime.timedelta(minutes=time_since_update)
         return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
                                                             {"last_checked":
@@ -52,3 +52,13 @@ class Alert(object):
             "user_email": self.user_email,
             "item_id": self.item._id
         }
+
+    def load_item_price(self):
+        self.item.load_item_price()
+        self.last_check = datetime.datetime.utcnow()
+        self.save_to_mongo()
+        return self.item.price
+
+    def send_email_if_price_reached(self):
+        if float(self.item.price) <= float(self.price_limit):
+            self.send()

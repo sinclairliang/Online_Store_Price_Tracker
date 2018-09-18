@@ -1,1 +1,2 @@
 COLLECTION = 'alerts'
+ALERT_TIMEOUT = 10
