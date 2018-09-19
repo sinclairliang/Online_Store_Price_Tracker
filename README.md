@@ -2,6 +2,7 @@
 
 ### Progress
 **14th September, 2018: Started Project**
+**19th September, 2018: Passed Backend Test**
 
 Flowchart
 
