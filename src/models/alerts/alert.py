@@ -10,21 +10,21 @@ from src.models.items.item import Item
 
 
 class Alert(object):
-    def __init__(self, user_email, price_limit, item_id, last_check=None, _id=None):
-        self.user_email = user_email.email
+    def __init__(self, user_email, price_limit, item_id, last_checked=None, _id=None):
+        self.user_email = user_email
         self.price_limit = price_limit
         self.item = Item.get_by_id(item_id)
-        self.last_check = datetime.datetime.utcnow() if last_check is None else last_check
+        self.last_checked = datetime.datetime.utcnow() if last_checked is None else last_checked
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
         return "---Alert for {} on item {} with the price limit {}---".format(self.user_email,
                                                                               self.item.name,
-                                                                              self.item.price_limit)
+                                                                              self.price_limit)
 
     def send(self):
         msg = MIMEText("We found you a deal for you. Click on link: {}".format(self.item.url))
-        msg['Subject'] = 'Price Reached for item{}!'.format(self.item.name)
+        msg['Subject'] = 'Price Reached for item {}!'.format(self.item.name)
         msg['From'] = LoginInfo.LOGIN
         msg['To'] = self.user_email
         s = smtplib.SMTP('smtp.mailgun.org', 587)
@@ -38,8 +38,9 @@ class Alert(object):
     def find_update(cls, time_since_update=AlertConstants.ALERT_TIMEOUT):
         last_updated_limit = datetime.datetime.utcnow() - datetime.timedelta(minutes=time_since_update)
         # print(last_updated_limit)
-        return [cls(**element) for element in Database.find(AlertConstants.COLLECTION, {"last_check": {"$lte": datetime(last_updated_limit)}})]
-                                        # db.alerts.find({"last_checked" : {"$gte": ISODate("2013-10-01T00:00:00.000Z")} })
+        return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
+                                                            {"last_checked":
+                                                            {"$lte": last_updated_limit}})]
 
     def save_to_mongo(self):
         Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
@@ -47,7 +48,7 @@ class Alert(object):
     def json(self):
         return{
             "price_limit": self.price_limit,
-            "last_check": self.last_check,
+            "last_checked": self.last_check,
             "_id": self._id,
             "user_email": self.user_email,
             "item_id": self.item._id
