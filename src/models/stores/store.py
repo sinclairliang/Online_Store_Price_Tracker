@@ -19,6 +19,9 @@ class Store(object):
     def get_tag_name(self):
         return self.tag_name
 
+    def test(self):
+        pass
+
     def get_query_name(self):
         return self.query
 
