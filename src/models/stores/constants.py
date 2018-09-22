@@ -1,1 +1,1 @@
-COLLECTION = 'store'
+COLLECTION = 'stores'
