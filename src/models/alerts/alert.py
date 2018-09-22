@@ -2,7 +2,7 @@ import uuid
 import smtplib
 from email.mime.text import MIMEText
 import src.models.alerts.constants as AlertConstants
-import src.models.alerts.login as LoginInfo
+import src.models.alerts.login_info as LoginInfo
 
 import datetime
 from src.commom.database import Database
