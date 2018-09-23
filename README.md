@@ -20,3 +20,7 @@ Flowchart
 	beautifulsoup4
 	uuid
 	passlib
+	re
+	requests
+	smtplib
+	email
