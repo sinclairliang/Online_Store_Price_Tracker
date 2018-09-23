@@ -62,3 +62,6 @@ class Alert(object):
     def send_email_if_price_reached(self):
         if float(self.item.price) <= float(self.price_limit):
             self.send()
+
+    def blah(self):
+        pass
