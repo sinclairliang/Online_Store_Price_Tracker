@@ -17,7 +17,7 @@ class User(object):
     @staticmethod
     def login_valid(email, password):
         """
-        This method verifies email/password combo is valid or not
+        This method verifies wether email/password combination is valid or not
         Checks if the email exists, and the password is correct to it
         :param email: user's email
         :param password: a sha512 hashed password

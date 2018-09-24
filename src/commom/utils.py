@@ -26,5 +26,8 @@ class Utils(object):
 
     @staticmethod
     def email_is_valid(email):
+        """
+        Checks if the email address is valid by usuing Regular Expression
+        """
         email_address_matcher = re.compile("^[\w-]+@([\w-]+\.)+[\w]+$")
         return True if email_address_matcher.match(email) else False
