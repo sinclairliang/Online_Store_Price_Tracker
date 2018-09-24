@@ -2,7 +2,11 @@
 
 ### Progress
 **14th September, 2018: Started Project**
+
 **19th September, 2018: Passed Backend Test**
+
+**22nd September, 2018: Migrated to Linux from Mac**
+
 
 Flowchart
 
