@@ -28,3 +28,11 @@ Flowchart
 	requests
 	smtplib
 	email
+
+## Features
+	☑ Send emails when price drops below target price
+	☑ Supprts most online Stores including Amazon
+
+## Things I am working on after class  🚧🚧
+	◻ Send SMS to users instead of emails
+	◻ An interactive frontend page for users to create, edit and manage alerts
