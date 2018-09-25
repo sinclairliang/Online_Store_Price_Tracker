@@ -19,22 +19,25 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Stores">Stores</a>
+                    <a class="nav-link" href="/stores">Stores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Alerts">Alerts</a>
+                    <a class="nav-link" href="/alerts">Alerts</a>
                 </li>
             </ul>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a>
-                </li>
-            </ul>
+            {% if session['email'] %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/alerts"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Your Alerts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
+                </ul>
+            {% end if %}
         </div>
     </nav>
 
