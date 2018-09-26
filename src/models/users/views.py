@@ -18,7 +18,7 @@ def login_user():
                 return redirect(url_for(".user_alerts"))
         except UserErrors.UserError as e:
             return e.message
-    return render_template("users/login.jinja2") # wish to return a pop-up window
+    return render_template("users/login.jinja2")  # wish to return a pop-up window
 
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
@@ -31,8 +31,8 @@ def register_user():
                 session['email'] = email
                 return redirect(url_for(".user_alerts"))
         except UserErrors.UserError as e:
-                return e.message
-    return render_template("users/register.jinja2") # wish to return a pop-up window
+            return e.message
+    return render_template("users/register.jinja2")  # wish to return a pop-up window
 
 
 @user_blueprint.route('/alerts')
