@@ -30,7 +30,7 @@ Flowchart
 	email
 
 ## Features
-	✅ Send emails when price drops below target price
+	✅ Sends emails when price drops below target price
 	✅ Supprts most online Stores including Amazon
 
 ## Things I am working on after class  🚧🚧

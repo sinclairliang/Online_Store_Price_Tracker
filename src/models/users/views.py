@@ -42,7 +42,8 @@ def user_alerts():
 
 @user_blueprint.route('/logout')
 def logout_user():
-    pass
+    session['email'] = None
+    return redirect(url_for('home'))
 
 
 @user_blueprint.route('/check_alerts/string:user_id')
