@@ -24,8 +24,8 @@ def login_user():
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register_user():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['hashed']
+        email = request.form.get('email', False)
+        password = request.form.get('password', False)
         try:
             if User.register_user(email, password):
                 session['email'] = email
