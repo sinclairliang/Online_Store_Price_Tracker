@@ -62,3 +62,7 @@ class Alert(object):
     def send_email_if_price_reached(self):
         if float(self.item.price) <= float(self.price_limit):
             self.send()
+
+    @classmethod
+    def find_by_user_email(cls, user_email):
+        return [cls(**elem) for elem in Database.find(AlertConstants.COLLECTION, {'user_email':user_email})]

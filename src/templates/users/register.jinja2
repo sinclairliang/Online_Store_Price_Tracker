@@ -1,8 +1,8 @@
 {% extends "base.jinja2" %}
 {% block content%}
 <div class="form-size">
-    <!--<form action="{{ url_for('users.register_user') }}" method="POST">-->
-    <form method="POST">
+    <form action="{{ url_for('users.register_user') }}" method="POST">
+    <!--<form method="POST">-->
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
