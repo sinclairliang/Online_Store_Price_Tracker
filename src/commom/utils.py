@@ -29,7 +29,11 @@ class Utils(object):
         """
         Checks if the email address is valid by using Regular Expression
         """
+        # print("type of email == " + str(type(email)))
+        # print(email)
         email_address_matcher = re.compile("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$")
-        if email_address_matcher.match(email) is None:
+        # email_address_matcher = re.compile("@")
+
+        if email_address_matcher.match(str(email)) is None:
             return False
         return True
