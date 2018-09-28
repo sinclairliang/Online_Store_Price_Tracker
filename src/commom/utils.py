@@ -34,6 +34,6 @@ class Utils(object):
         email_address_matcher = re.compile("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$")
         # email_address_matcher = re.compile("@")
 
-        if email_address_matcher.match(str(email)) is None:
+        if email_address_matcher.match(email) is None:
             return False
         return True
