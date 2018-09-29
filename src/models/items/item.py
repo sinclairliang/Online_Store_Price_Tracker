@@ -44,7 +44,7 @@ class Item(object):
             "name": self.name,
             "url": self.url,
             "price": self.price,
-            "id": self._id
+            "_id": self._id
         }
 
     @classmethod
