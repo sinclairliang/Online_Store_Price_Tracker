@@ -1,4 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
+
+from src.models.alerts.alert import Alert
 
 alert_blueprint = Blueprint('alerts', __name__)
 
@@ -20,7 +22,8 @@ def deactivate_alert(alert_id):
 
 @alert_blueprint.route('/<string:alert_id>')
 def get_alert_page(alert_id):
-    pass
+    alert = Alert.find_by_id(alert_id)
+    return render_template('alerts/alert.jinja2', alert=alert)
 
 
 @alert_blueprint.route('/for_user/<string:user_id>')
