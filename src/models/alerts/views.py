@@ -12,6 +12,7 @@ def index():
 
 
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
+@requires_login
 def create_alert():
     if request.method == 'POST':
         name = request.form['name']
