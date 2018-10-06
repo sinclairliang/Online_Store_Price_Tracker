@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, redirect, url_for
 
 from src.models.alerts.alert import Alert
 from src.models.items.item import Item
+import src.models.users.decorators as user_decorators
 
 alert_blueprint = Blueprint('alerts', __name__)
 
@@ -12,7 +13,7 @@ def index():
 
 
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
-@requires_login
+@user_decorators.requires_login
 def create_alert():
     if request.method == 'POST':
         name = request.form['name']
@@ -29,16 +30,18 @@ def create_alert():
 
 
 @alert_blueprint.route('/deactivate/<string:alert_id>')
+@user_decorators.requires_login
 def deactivate_alert(alert_id):
     pass
 
 
 @alert_blueprint.route('/<string:alert_id>')
+@user_decorators.requires_login
 def get_alert_page(alert_id):
     alert = Alert.find_by_id(alert_id)
     return render_template('alerts/alert.jinja2', alert=alert)
 
-
-@alert_blueprint.route('/for_user/<string:user_id>')
-def get_user_alert(user_id):
-    pass
+@alert_blueprint.route('/check/<string:alert_id>')
+def check_alert_price(alert_id):
+    Alert.find_by_id(alert_id).load_item_price()
+    return redirect(url_for('.get_alert_page', alert_id=alert_id))

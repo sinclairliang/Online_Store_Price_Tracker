@@ -1,5 +1,25 @@
 {% extends "base.jinja2" %}
-{% block content%}
-    <p>{{ alert.item.name }}</p>
+{% block content %}
+    <div class="page-header">
+        <h1> Alert
+            <small> for '{{ alert.item.name }}'</small>
+        </h1>
+    </div>
+    <p>
+        Last price found <strong>{{ alert.item.price }}</strong>
+    </p>
+    <p>
+        Last checked on <strong>{{ alert.last_checked.strftime('%d-%m-%Y at %H:%M') }}</strong>
+    </p>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="{{ alert.item.url }}" class="btn btn-info" role="button">Visit</a>
+            <a href="{{ url_for('alerts.deactivate_alert', alert_id=alert.id) }}" class="btn btn-danger" role="button">Deactivate</a>
+            <a href="{{ url_for('alerts.check_alert_price', alert_id=alert._id) }}" class="btn btn-warning" role="button">Check</a>
+
+        </div>
+    </div>
+
 
 {% endblock %}
