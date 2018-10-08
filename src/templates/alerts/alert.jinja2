@@ -15,9 +15,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <a href="{{ alert.item.url }}" class="btn btn-info" role="button">Visit</a>
-            <a href="{{ url_for('alerts.deactivate_alert', alert_id=alert.id) }}" class="btn btn-danger" role="button">Deactivate</a>
+            {% if alert.active  %}
+                <a href="{{ url_for('alerts.deactivate_alert', alert_id=alert._id) }}" class="btn btn-danger" role="button">Deactivate</a>
+            {% else %}
+                <a href="{{ url_for('alerts.activate_alert', alert_id=alert._id) }}" class="btn btn-success" role="button">Activate</a>
+            {% endif %}
             <a href="{{ url_for('alerts.check_alert_price', alert_id=alert._id) }}" class="btn btn-warning" role="button">Check</a>
-
         </div>
     </div>
 
