@@ -13,3 +13,6 @@ def index():
 def store_page():
     pass
 
+@store_blueprint.route('/new', methods=['GET', 'POST'])
+def create_store():
+    return "Store creation page"
