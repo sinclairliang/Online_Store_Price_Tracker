@@ -62,3 +62,8 @@ class Store(object):
                 return store
             except:
                 raise StoreError.StoreNotFoundError("We couldn't find stores by this URL...")
+
+
+    @classmethod
+    def all(cls):
+        return [cls(**element) for element in Database.find(StoreConstants.COLLECTION,({}))]

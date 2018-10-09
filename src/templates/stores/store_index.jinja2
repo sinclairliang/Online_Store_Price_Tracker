@@ -8,17 +8,16 @@
     </div>
     <div class="list-group">
         {% for store in stores %}
-            <!--
-            Display list of stores
-            <a href = "#" class="List-group-item">
-            <h4 class="list-group-item-title">Title</h4>
-            <p class="list-group-item-text">Description</p>
-            -->
+            <a href="{{ url_for('stores.store_page', store_id=store._id) }}" class="List-group-item">
+                <h4 class="list-group-item-title">{{ store.name }}</h4>
+                <p class="list-group-item-text">All URLs in this store should start with <strong>{{ store.url_prefix }}</strong></p>
+            </a>
         {% endfor %}
+
         <span>
             <a class="btn btn-success" href="{{ url_for('stores.create_store') }}">
             <i class="fa fa-plus" aria-hidden="true"> Create new store</i>
-        </a>
+            </a>
         </span>
 
     </div>
