@@ -10,8 +10,6 @@
     <div class="list-group">
         {% for alert in alerts %}
             {% if  alert.active %}
-
-
                 <a href="{{ url_for('alerts.get_alert_page', alert_id=alert._id) }}"
                    class="list-group-item">
                     <h4 class="list-group-item-heading">Alert for {{ alert.item.name }}</h4>
