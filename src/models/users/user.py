@@ -14,7 +14,7 @@ class User(object):
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
-        return"---User {}---".format(self.email)
+        return "---User {}---".format(self.email)
 
     @staticmethod
     def login_valid(email, password):
@@ -25,7 +25,7 @@ class User(object):
         :param password: a sha512 hashed password
         :return: Boolean value
         """
-        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email}) # password in sha512->pbkdf2_sha512
+        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email})  # password in sha512->pbkdf2_sha512
         if user_data is None:
             raise UserErrors.UserNotExistException("Your user does not exist")
         if not Utils.check_hashed_password(password, user_data['password']):

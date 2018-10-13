@@ -9,7 +9,7 @@ from src.models.stores.store import Store
 
 
 class Item(object):
-    def __init__(self, name, url, price = None, _id=None):
+    def __init__(self, name, url, price=None, _id=None):
         self.name = name
         self.url = url
         store = Store.get_by_url(url)

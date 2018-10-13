@@ -15,6 +15,7 @@ def index():
 def store_page(store_id):
     return "This is the store page"
 
+
 @store_blueprint.route('/new', methods=['GET', 'POST'])
 def create_store():
     return "Store creation page"

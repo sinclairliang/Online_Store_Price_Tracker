@@ -35,11 +35,13 @@ def deactivate_alert(alert_id):
     Alert.find_by_id(alert_id).deactivate()
     return redirect(url_for('alerts.get_alert_page', alert_id=alert_id))
 
+
 @alert_blueprint.route('/activate/<string:alert_id>')
 @user_decorators.requires_login
 def activate_alert(alert_id):
     Alert.find_by_id(alert_id).activate()
     return redirect(url_for('alerts.get_alert_page', alert_id=alert_id))
+
 
 @alert_blueprint.route('/delete/<string:alert_id>')
 @user_decorators.requires_login
@@ -47,11 +49,13 @@ def delete_alert(alert_id):
     Alert.find_by_id(alert_id).delete()
     return redirect(url_for('users.user_alerts'))
 
+
 @alert_blueprint.route('/<string:alert_id>')
 @user_decorators.requires_login
 def get_alert_page(alert_id):
     alert = Alert.find_by_id(alert_id)
     return render_template('alerts/alert.jinja2', alert=alert)
+
 
 @alert_blueprint.route('/check/<string:alert_id>')
 def check_alert_price(alert_id):
