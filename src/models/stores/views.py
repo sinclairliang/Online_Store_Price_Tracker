@@ -20,6 +20,7 @@ def store_page(store_id):
 def create_store():
     return "Store creation page"
 
+
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST'])
 def edit_store(store_id):
     if request.method == 'POST':
