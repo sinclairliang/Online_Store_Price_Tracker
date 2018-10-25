@@ -10,6 +10,8 @@ from src.models.items.item import Item
 
 
 class Alert(object):
+
+    # Alert object
     def __init__(self, user_email, price_limit, item_id, active=True, last_checked=None, _id=None):
         self.user_email = user_email
         self.price_limit = price_limit
@@ -19,11 +21,14 @@ class Alert(object):
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
+        # overriding print method
         return "---Alert for {} on item {} with the price limit {}---".format(self.user_email,
                                                                               self.item.name,
                                                                               self.price_limit)
 
     def send(self):
+
+        # sending emails to users by using Mailgun API
         msg = MIMEText("We found you a deal for you. Click on link: {}".format(self.item.url))
         msg['Subject'] = 'Price Reached for item {}!'.format(self.item.name)
         msg['From'] = LoginInfo.LOGIN
@@ -37,6 +42,8 @@ class Alert(object):
 
     @classmethod
     def find_update(cls, time_since_update=AlertConstants.ALERT_TIMEOUT):
+        # update alerts status if last update was more than ALERT_TIMEOUT minutes ago,
+        # default 10 minutes
         last_updated_limit = datetime.datetime.utcnow() - datetime.timedelta(minutes=time_since_update)
         return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
                                                             {"last_checked":
@@ -46,6 +53,7 @@ class Alert(object):
         Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
 
     def json(self):
+        # returns a JSON object to represent alerts
         return {
             "price_limit": self.price_limit,
             "last_checked": self.last_checked,
@@ -56,8 +64,11 @@ class Alert(object):
         }
 
     def load_item_price(self):
+        # calling methods in item class to update price
         self.item.load_item_price()
+        # update last checked time
         self.last_checked = datetime.datetime.utcnow()
+        # save to data base
         self.item.save_to_mongo()
         self.save_to_mongo()
         return self.item.price

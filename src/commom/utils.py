@@ -4,6 +4,7 @@ import re
 
 class Utils(object):
 
+    # contains ways to verify user emals and login credantials
     @staticmethod
     def hash_password(password):
         """
