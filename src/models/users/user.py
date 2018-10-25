@@ -1,5 +1,4 @@
 import uuid
-
 from src.commom.database import Database
 from src.commom.utils import Utils
 import src.models.users.errors as UserErrors
