@@ -19,6 +19,7 @@ class Item(object):
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def __repr__(self):
+        # overriding print method
         if self.price is not None:
             return "---Item {} at the price of {} with the URL {}---".format(self.name,
                                                                              self.price,
@@ -40,6 +41,7 @@ class Item(object):
         Database.update(ItemConstants.COLLECTION, {'_id': self._id}, self.json())
 
     def json(self):
+        # return the json representation of this object
         return {
             "name": self.name,
             "url": self.url,

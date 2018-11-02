@@ -27,7 +27,6 @@ class Alert(object):
                                                                               self.price_limit)
 
     def send(self):
-
         # sending emails to users by using Mailgun API
         msg = MIMEText("We found you a deal for you. Click on link: {}".format(self.item.url))
         msg['Subject'] = 'Price Reached for item {}!'.format(self.item.name)

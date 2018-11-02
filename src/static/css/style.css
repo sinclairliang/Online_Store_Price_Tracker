@@ -1,4 +1,4 @@
-.form-size{
+.form-size {
     max-width: 640px;
     margin: 0 auto;
 
@@ -10,4 +10,8 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
 
+}
+
+.list-group {
+    padding-bottom: 25px;
 }
