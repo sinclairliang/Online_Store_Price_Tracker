@@ -66,3 +66,6 @@ class Store(object):
     @classmethod
     def all(cls):
         return [cls(**element) for element in Database.find(StoreConstants.COLLECTION, ({}))]
+
+    def delete(self):
+        Database.remove(StoreConstants.COLLECTION, {'_id': self._id})
