@@ -1,4 +1,5 @@
 DEBUG = True
+
 ADMINS = frozenset([
-    "yourname@yourdomain.com"
+    "sinclairliang@gmail.com"
 ])

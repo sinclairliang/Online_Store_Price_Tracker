@@ -12,7 +12,7 @@ user_blueprint = Blueprint('users', __name__)
 def login_user():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['hashed']
+        password = request.form.get('password')
         try:
             if User.login_valid(email, password):
                 session['email'] = email
