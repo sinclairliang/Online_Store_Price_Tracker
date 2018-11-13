@@ -27,10 +27,12 @@ class Item(object):
         return "---Item {} with the URL {}---".format(self.name, self.url)
 
     def load_item_price(self):
+
         request = requests.get(self.url)
         content = request.content
         soup = bs4.BeautifulSoup(content, "html.parser")
         element = soup.find(self.tag_name, self.query)
+        print(soup)
         string_price = element.text.strip()
         pattern = re.compile("(\d+.\d+)")
         match = pattern.search(string_price)

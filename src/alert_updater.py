@@ -8,5 +8,6 @@ alerts_need_updates = Alert.find_update()
 # print(alerts_need_updates)
 
 for alert in alerts_need_updates:
+    print(alert)
     alert.load_item_price()
-    # alert.send_email_if_price_reached()
+    alert.send_email_if_price_reached()
