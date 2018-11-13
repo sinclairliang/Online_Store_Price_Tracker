@@ -9,7 +9,7 @@ alert_blueprint = Blueprint('alerts', __name__)
 
 @alert_blueprint.route('/')
 def index():
-    return "This is the alerts index page"
+    return "Log in to see your alerts!"
 
 
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
