@@ -6,6 +6,9 @@
         </h1>
     </div>
     <p>
+        Current price alert set to <strong>{{ alert.price_limit }}</strong>
+    </p>
+    <p>
         Last price found <strong>{{ alert.item.price }}</strong>
     </p>
     <p>
@@ -15,13 +18,18 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <a href="{{ alert.item.url }}" class="btn btn-info" role="button">Visit</a>
-            {% if alert.active  %}
-                <a href="{{ url_for('alerts.deactivate_alert', alert_id=alert._id) }}" class="btn btn-danger" role="button">Deactivate</a>
+            <a href="{{ url_for('alerts.edit_alert', alert_id=alert._id) }}" class="btn btn-warning" role="button">Edit
+                Alert</a>
+            {% if alert.active %}
+                <a href="{{ url_for('alerts.deactivate_alert', alert_id=alert._id) }}" class="btn btn-danger"
+                   role="button">Deactivate</a>
             {% else %}
-                <a href="{{ url_for('alerts.activate_alert', alert_id=alert._id) }}" class="btn btn-success" role="button">Activate</a>
+                <a href="{{ url_for('alerts.activate_alert', alert_id=alert._id) }}" class="btn btn-success"
+                   role="button">Activate</a>
                 <a href="{{ url_for('alerts.delete_alert', alert_id=alert._id) }}" class="btn btn-danger" role="button">Delete</a>
             {% endif %}
-            <a href="{{ url_for('alerts.check_alert_price', alert_id=alert._id) }}" class="btn btn-warning" role="button">Check</a>
+            <a href="{{ url_for('alerts.check_alert_price', alert_id=alert._id) }}" class="btn btn-warning"
+               role="button">Check</a>
         </div>
     </div>
 {% endblock %}
