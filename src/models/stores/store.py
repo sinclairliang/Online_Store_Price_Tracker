@@ -52,6 +52,7 @@ class Store(object):
         :param url_prefix:
         :return:
         """
+        # need to find better matching patterns
         return cls(**Database.find_one(StoreConstants.COLLECTION, {"url_prefix": {"$regex": "^{}".format(url_prefix)}}))
 
     @classmethod
