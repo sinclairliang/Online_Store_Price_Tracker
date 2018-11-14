@@ -59,6 +59,7 @@ class Store(object):
         for i in range(len(url)):
             try:
                 store = cls.get_by_url_prefix(url[:i])
+                print(store)
                 return store
             except:
                 raise StoreError.StoreNotFoundError("We couldn't find stores by this URL...")

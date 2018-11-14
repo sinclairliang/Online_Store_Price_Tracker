@@ -32,7 +32,7 @@ class Item(object):
         content = request.content
         soup = bs4.BeautifulSoup(content, "html.parser")
         element = soup.find(self.tag_name, self.query)
-        print(soup)
+        print(self.tag_name)
         string_price = element.text.strip()
         pattern = re.compile("(\d+.\d+)")
         match = pattern.search(string_price)
