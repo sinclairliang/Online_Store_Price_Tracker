@@ -11,13 +11,17 @@ user_blueprint = Blueprint('users', __name__)
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
+        # read the form data
         email = request.form['email']
         password = request.form.get('password')
         try:
+            # then try to match with user's email and password
             if User.login_valid(email, password):
+                # matching the email with the email in session
                 session['email'] = email
                 return redirect(url_for(".user_alerts"))
         except UserErrors.UserError as e:
+            # raise an error if not matched
             return e.message
     return render_template("users/login.jinja2")  # wish to return a pop-up window
 
@@ -47,6 +51,7 @@ def user_alerts():
 
 @user_blueprint.route('/logout')
 def logout_user():
+    # empty the session
     session['email'] = None
     return redirect(url_for('home'))
 
