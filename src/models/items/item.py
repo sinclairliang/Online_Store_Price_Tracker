@@ -40,7 +40,8 @@ class Item(object):
         return self.price
 
     def save_to_mongo(self):
-        Database.update(ItemConstants.COLLECTION, {'_id': self._id}, self.json())
+        Database.update(ItemConstants.COLLECTION, {
+                        '_id': self._id}, self.json())
 
     def json(self):
         # return the json representation of this object

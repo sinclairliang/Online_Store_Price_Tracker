@@ -24,11 +24,13 @@ class User(object):
         :param password: a sha512 hashed password
         :return: Boolean value
         """
-        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email})  # password in sha512->pbkdf2_sha512
+        user_data = Database.find_one(UserConstants.COLLECTION, {
+                                      "email": email})  # password in sha512->pbkdf2_sha512
         if user_data is None:
             raise UserErrors.UserNotExistException("Your user does not exist")
         if not Utils.check_hashed_password(password, user_data['password']):
-            raise UserErrors.IncorrectPasswordException("Your password is not correct")
+            raise UserErrors.IncorrectPasswordException(
+                "Your password is not correct")
         return True
 
     @staticmethod
@@ -40,12 +42,15 @@ class User(object):
         :return: Boolean, to see if the process is successful (Exceptions might be raised)
         """
 
-        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email})
+        user_data = Database.find_one(
+            UserConstants.COLLECTION, {"email": email})
 
         if user_data is not None:
-            raise UserErrors.UserAlreadyRegisterError("The user is already registered with us.")
+            raise UserErrors.UserAlreadyRegisterError(
+                "The user is already registered with us.")
         if not Utils.email_is_valid(email):
-            raise UserErrors.UserEmailInvalidError("The email address cannot be parsed. Questions?")
+            raise UserErrors.UserEmailInvalidError(
+                "The email address cannot be parsed. Questions?")
         User(email, Utils.hash_password(password)).save_to_mongo()
         return True
 
