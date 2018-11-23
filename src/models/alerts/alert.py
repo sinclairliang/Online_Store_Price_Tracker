@@ -28,7 +28,8 @@ class Alert(object):
 
     def send(self):
         # sending emails to users by using Mailgun API
-        msg = MIMEText("We found you a deal for you. Click on link: {}".format(self.item.url))
+        msg = MIMEText(
+            "We found you a deal for you. Click on link: {}".format(self.item.url))
         msg['Subject'] = 'Price Reached for item {}!'.format(self.item.name)
         msg['From'] = LoginInfo.LOGIN
         msg['To'] = self.user_email
@@ -43,13 +44,15 @@ class Alert(object):
     def find_update(cls, time_since_update=AlertConstants.ALERT_TIMEOUT):
         # update alerts status if last update was more than ALERT_TIMEOUT minutes ago,
         # default 10 minutes
-        last_updated_limit = datetime.datetime.utcnow() - datetime.timedelta(minutes=time_since_update)
+        last_updated_limit = datetime.datetime.utcnow(
+        ) - datetime.timedelta(minutes=time_since_update)
         return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
                                                             {"last_checked":
-                                                                 {"$lte": last_updated_limit}, "active": True})]
+                                                             {"$lte": last_updated_limit}, "active": True})]
 
     def save_to_mongo(self):
-        Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
+        Database.update(AlertConstants.COLLECTION, {
+                        "_id": self._id}, self.json())
 
     def json(self):
         # returns a JSON object to represent alerts
