@@ -1,8 +1,7 @@
 import uuid
-
-from src.commom.database import Database
 import src.models.stores.constants as StoreConstants
 import src.models.stores.errors as StoreError
+from src.commom.database import Database
 
 
 class Store(object):

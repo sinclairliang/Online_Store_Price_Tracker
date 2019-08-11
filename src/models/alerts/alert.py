@@ -1,12 +1,11 @@
 import uuid
 import smtplib
-from email.mime.text import MIMEText
 import src.models.alerts.constants as AlertConstants
 import src.models.alerts.login_info as LoginInfo
-
 import datetime
 from src.commom.database import Database
 from src.models.items.item import Item
+from email.mime.text import MIMEText
 
 
 class Alert(object):
@@ -48,11 +47,11 @@ class Alert(object):
         ) - datetime.timedelta(minutes=time_since_update)
         return [cls(**element) for element in Database.find(AlertConstants.COLLECTION,
                                                             {"last_checked":
-                                                             {"$lte": last_updated_limit}, "active": True})]
+                                                                 {"$lte": last_updated_limit}, "active": True})]
 
     def save_to_mongo(self):
         Database.update(AlertConstants.COLLECTION, {
-                        "_id": self._id}, self.json())
+            "_id": self._id}, self.json())
 
     def json(self):
         # returns a JSON object to represent alerts

@@ -2,10 +2,9 @@ import requests
 import bs4
 import re
 import uuid
-
 from src.commom.database import Database
-import src.models.items.constants as ItemConstants
 from src.models.stores.store import Store
+import src.models.items.constants as ItemConstants
 
 
 class Item(object):
@@ -27,7 +26,6 @@ class Item(object):
         return "---Item {} with the URL {}---".format(self.name, self.url)
 
     def load_item_price(self):
-
         request = requests.get(self.url)
         content = request.content
         soup = bs4.BeautifulSoup(content, "html.parser")
@@ -41,7 +39,7 @@ class Item(object):
 
     def save_to_mongo(self):
         Database.update(ItemConstants.COLLECTION, {
-                        '_id': self._id}, self.json())
+            '_id': self._id}, self.json())
 
     def json(self):
         # return the json representation of this object

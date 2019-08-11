@@ -25,7 +25,7 @@ class User(object):
         :return: Boolean value
         """
         user_data = Database.find_one(UserConstants.COLLECTION, {
-                                      "email": email})  # password in sha512->pbkdf2_sha512
+            "email": email})  # password in sha512->pbkdf2_sha512
         if user_data is None:
             raise UserErrors.UserNotExistException("Your user does not exist")
         if not Utils.check_hashed_password(password, user_data['password']):

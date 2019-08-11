@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
-
 from src.models.alerts.alert import Alert
 from src.models.items.item import Item
 import src.models.users.decorators as user_decorators
@@ -43,7 +42,6 @@ def edit_alert(alert_id):
 
         return redirect(url_for('users.user_alerts'))
     return render_template('alerts/edit_alert.jinja2', alert=alert)
-
 
 
 @alert_blueprint.route('/deactivate/<string:alert_id>')
