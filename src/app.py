@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+srfrom
+flask
+import Flask, render_template
 
 from src.commom.database import Database
 
@@ -20,7 +22,6 @@ def home():
 ADMINS = frozenset([
     "sinclairliang@gmail.com"
 ])
-
 
 from src.models.stores.views import store_blueprint
 from src.models.alerts.views import alert_blueprint
