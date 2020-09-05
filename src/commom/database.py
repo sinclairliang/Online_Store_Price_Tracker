@@ -28,7 +28,6 @@ class Database(object):
     def update(collection, query, data):
         Database.DATABASE[collection].update(query, data, upsert=True)
 
-
     @staticmethod
     def remove(collection, query):
         Database.DATABASE[collection].remove(query)
